@@ -116,29 +116,7 @@ class PipAccelerator(object):
         self.reported_requirements = []
 
     def validate_environment(self):
-        """
-        Make sure :data:`sys.prefix` matches ``$VIRTUAL_ENV`` (if defined).
-
-        This may seem like a strange requirement to dictate but it avoids hairy
-        issues like `documented here <https://github.com/paylogic/pip-accel/issues/5>`_.
-
-        The most sneaky thing is that ``pip`` doesn't have this problem
-        (de-facto) because ``virtualenv`` copies ``pip`` wherever it goes...
-        (``pip-accel`` on the other hand has to be installed by the user).
-        """
-        environment = os.environ.get('VIRTUAL_ENV')
-        if environment:
-            if not same_directories(sys.prefix, environment):
-                raise EnvironmentMismatchError("""
-                    You are trying to install packages in environment #1 which
-                    is different from environment #2 where pip-accel is
-                    installed! Please install pip-accel under environment #1 to
-                    install packages there.
-
-                    Environment #1: {environment} (defined by $VIRTUAL_ENV)
-
-                    Environment #2: {prefix} (Python's installation prefix)
-                """, environment=environment, prefix=sys.prefix)
+        pass
 
     def initialize_directories(self):
         """Automatically create the local source distribution index directory."""
